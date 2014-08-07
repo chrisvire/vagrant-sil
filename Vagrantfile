@@ -79,7 +79,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # The boxes are configured/versioned at https://vagrantcloud.com/chrisvire
       # See chris_hubbard@sil.org for more information/help
       b.vm.box="chrisvire/#{box_name || name}"
-      bootstrap b, "vagrant--#{name}"
+      bootstrap b, "vagrant-sil-#{name}"
     end
   end
 end
