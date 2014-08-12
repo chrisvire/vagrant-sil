@@ -69,10 +69,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     'saucy32',
     'trusty64',
     'trusty32',
-    ['wasta64-14', 'wasta64-14.04'],
-    ['wasta32-14', 'wasta32-14.04'],
-    ['wasta64-12', 'wasta64-12.04'],
-    ['wasta32-12', 'wasta32-12.04']
+    'wasta64-14',
+    'wasta32-14',
+    'wasta64-12',
+    'wasta32-12'
   ]
   .each do |name, box_name|
     config.vm.define name do |b|
