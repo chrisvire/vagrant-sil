@@ -1,6 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+$hostname_prefix = ENV['VAGRANT_HOSTNAME_PREFIX']
 pref_interface = ENV.fetch('VAGRANT_PREF_INTERFACE', "eth0,eth1,eth2,wlan0,en0,en1,en2").split(/,/)
 bridgedifs_text = %x( VBoxManage list bridgedifs ).split(/^$/)
 bridgedifs_text.pop #last item is always a blank entry
@@ -47,9 +48,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     .select { |host_dir,_| File.directory?(host_dir) }
     .each { |host_dir, vm_dir| config.vm.synced_folder host_dir, vm_dir }
 
+    config.vm.hostname = "#{$hostname_prefix}-#{name}" unless $hostname_prefix.nil?
     config.vm.provider :virtualbox do |vb|
       vb.gui=options[:gui]
-      vb.name=name
+      vb.name="vagrant-sil-#{name}"
       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
 
@@ -79,7 +81,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # The boxes are configured/versioned at https://vagrantcloud.com/chrisvire
       # See chris_hubbard@sil.org for more information/help
       b.vm.box="chrisvire/#{box_name || name}"
-      bootstrap b, "vagrant-sil-#{name}"
+      bootstrap b, name
     end
   end
+
 end
