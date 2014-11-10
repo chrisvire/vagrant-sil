@@ -42,7 +42,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   def bootstrap(config, name, options = {})
     options = {:gui => true, :bridge => true}.merge(options)
 
-    { '#{Dir.home}' => '/home/vagrant/host',
+    { "#{Dir.home}" => '/home/vagrant/host',
       "#{Dir.home}/pbuilder" => '/home/vagrant/pbuilder'
     }
     .select { |host_dir,_| File.directory?(host_dir) }
