@@ -6,19 +6,19 @@ vagrant-sil contains [Vagrant](www.vagrantup.com) configuration for accessing pr
 Install the following required software components:
 * [vagrant](https://www.vagrantup.com/downloads.html) -- need 1.6.3+
 * [virtualbox](https://www.virtualbox.org/wiki/Downloads) -- need 4.3.18+
-** Windows: make sure path to VBoxManage is accessible from the command-line
+  * Windows: make sure path to VBoxManage is accessible from the command-line
 * At a command-line install vagrant-vbguest plugin
-** `vagrant plugin install vagrant-vbguest`
+  * `vagrant plugin install vagrant-vbguest`
 
 ## Usage
 * Clone this repo
 * At a command-line in the directory for this repo, use the vagrant command to start, halt, shutdown, or destroy
 * Examples:
-** list: `vagrant status`
-** start: `vagrant up <name>`
-** halt: `vagrant halt <name>`
-** shutdown: `vagrant shutdown <name>`
-** delete: `vagrant destroy -f <name>`
+  * list: `vagrant status`
+  * start: `vagrant up <name>`
+  * halt: `vagrant halt <name>`
+  * shutdown: `vagrant shutdown <name>`
+  * delete: `vagrant destroy -f <name>`
 
 ## Configuration
 
