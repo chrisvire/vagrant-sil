@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 # 'vagrant box list' display a list of the currently downloaded vagrant boxes
 # This list is ordered by box name and then by version. I don't have multiple
 # providers, so I don't know how those are handled.  I am assuming they are
