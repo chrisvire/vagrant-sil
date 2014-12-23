@@ -65,12 +65,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   [
+    'lucid64', # useful?
+    'lucid32', # useful?
     'precise64',
     'precise32',
     'saucy64',
     'saucy32',
     'trusty64',
     'trusty32',
+    'utopic64',
+    'utopic32',
     'wasta64-14',
     'wasta32-14',
     'wasta64-12',
