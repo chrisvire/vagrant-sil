@@ -75,6 +75,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     'trusty32',
     'utopic64',
     'utopic32',
+    'xenial64',
     'wasta64-14',
     'wasta32-14',
     'wasta64-12',
