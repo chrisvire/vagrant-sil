@@ -5,7 +5,7 @@ $hostname_prefix = ENV['VAGRANT_HOSTNAME_PREFIX']
 pref_interface = ENV.fetch('VAGRANT_PREF_INTERFACE', "eth0,eth1,eth2,wlan0,en0,en1,en2").split(/,/)
 bridgedifs_text = %x( VBoxManage list bridgedifs ).split(/^$/)
 bridgedifs_text.pop #last item is always a blank entry
-bridgedifs = {} 
+bridgedifs = {}
 bridgedifs_text.each do |bif_text|
   bif = {}
   bif_text.lines.each do |l|
@@ -13,7 +13,7 @@ bridgedifs_text.each do |bif_text|
     bif[values[0]] = values[1] unless values[0].nil?
   end
   unless bif["IPAddress"] == "0.0.0.0" || bif["IPV6Address"].nil?
-    bridgedifs[bif["Name"]] = bif 
+    bridgedifs[bif["Name"]] = bif
   end
 end
 
@@ -43,7 +43,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     options = {:gui => true, :bridge => true}.merge(options)
 
     { "#{Dir.home}" => '/home/vagrant/host',
-      "#{Dir.home}/pbuilder" => '/home/vagrant/pbuilder'
+      "#{Dir.home}/pbuilder" => '/home/vagrant/pbuilder',
+	  "./scripts" => '/home/vagrant/.scripts'
     }
     .select { |host_dir,_| File.directory?(host_dir) }
     .each { |host_dir, vm_dir| config.vm.synced_folder host_dir, vm_dir }
@@ -53,6 +54,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vb.gui=options[:gui]
       vb.name="vagrant-sil-#{name}"
       vb.customize ["modifyvm", :id, "--memory", "1024"]
+      vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
     end
 
     # add public network adapter
@@ -65,21 +67,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   [
-    'lucid64', # useful?
-    'lucid32', # useful?
-    'precise64',
-    'precise32',
-    'saucy64',
-    'saucy32',
+# Google Drive is not accessible anymore.
+# I will be migrating the files to a permanent home.
+#    'precise64',
+#    'precise32',
     'trusty64',
-    'trusty32',
-    'utopic64',
-    'utopic32',
-    'xenial64',
-    'wasta64-14',
-    'wasta32-14',
-    'wasta64-12',
-    'wasta32-12'
+#    'trusty32',
+#    'xenial64',
+#    'xenial32',
+#    'wasta64-14',
+#    'wasta32-14',
+#    'wasta64-12',
+#    'wasta32-12'
   ]
   .each do |name, box_name|
     config.vm.define name do |b|
