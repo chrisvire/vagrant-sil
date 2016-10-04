@@ -42,7 +42,7 @@ Each of the machines have been setup using the documentation for a [base box](ht
 sudo visudo
 (add "vagrant ALL=(ALL) NOPASSWD: ALL")
 ```
-ssh tweaks
+* ssh tweaks
 ```
 cd /etc/ssh
 sudo vi ssh_config
