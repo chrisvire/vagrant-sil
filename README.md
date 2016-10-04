@@ -6,9 +6,14 @@ vagrant-sil contains [Vagrant](www.vagrantup.com) configuration for accessing pr
 Install the following required software components:
 * [vagrant](https://www.vagrantup.com/downloads.html) -- need 1.6.3+
 * [virtualbox](https://www.virtualbox.org/wiki/Downloads) -- need 4.3.18+
-  * Windows: make sure path to VBoxManage is accessible from the command-line
+  * Windows: make sure path to `VBoxManage` is accessible from the command-line
 * At a command-line install vagrant-vbguest plugin
-  * `vagrant plugin install vagrant-vbguest`
+    
+    `vagrant plugin install vagrant-vbguest`
+
+* At a command-line install vagrant-cachier plugin (optional)
+  
+    `vagrant plugin install vagrant-cachier`
 
 ## Usage
 * Clone this repo
@@ -26,17 +31,24 @@ Each of the machines have been setup using the documentation for a [base box](ht
 * username=vagrant, password=vagrant
 * password-less sudo
 
-Each of the machines have been setup to make it easy to work with the [SIL package repositories](http://packages.sil.org) which mean:
-* pgp keys have been imported
-* apt is pre-configured to include main and experimental PSO repositories
-* additional packages have been installed: curl, aptitude, synaptic, git, vim, wget, git-gui, gitk, kdiff3-qt, terminator, ssh, gdebi, ttf-mscorefonts-installer
+Each of the machines have been setup to make it easy to work with [SIL LSDev](https://github.com/sillsdev) software
+* apt is pre-configured to include main and experimental [SIL package repositories](http://packages.sil.org)
+* package installation and uninstallation
+
+````bash
+    cd ~/Docuements
+    wget https://raw.githubusercontent.com/chrisvire/vagrant-sil/master/scripts/packages.sh
+    sudo bash packages.sh
+````
 
 Minor changes have been made to simplify testing:
 * Turn screen off when inactive: Never
 * Lock: Off
-* Uninstall deja-dup
 * Change default Profile Colors for terminal (makes it easier to distinguish from host terminal windows)
 * Unique background image per machine (to easily distinguish the version)
+* Adding default environment variables to disable usage tracking while testing
+* Show menus for windows in the Window's title bar
 * .bashrc change to include [git bash prompt](http://www.thehubbards.org/blog/2014/05/22/git-changing-bash-prompt/)
-* Disable Online Searches form Dash for Saucy+ (https://fixubuntu.com/fixubuntu.sh)
+* Disable Online Searches from Dash
+
 
