@@ -29,17 +29,34 @@ Install the following required software components:
 
 Each of the machines have been setup using the documentation for a [base box](https://docs.vagrantup.com/v2/boxes/base.html) which means:
 * username=vagrant, password=vagrant
+* install VBGuestAdditions
+* use vagrant insecure keypair
+```bash
+ mkdir ~/.ssh
+ chmod 0700 ~/.ssh
+ wget -O - https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub > ~/.ssh/authorized_keys
+ chmod 0600 ~/.ssh/authorized_keys
+```
 * password-less sudo
-
+```
+sudo visudo
+(add "vagrant ALL=(ALL) NOPASSWD: ALL")
+```
+ssh tweaks
+```
+cd /etc/ssh
+sudo vi ssh_config
+(add "UseDNS no")
+```
 Each of the machines have been setup to make it easy to work with [SIL LSDev](https://github.com/sillsdev) software
 * apt is pre-configured to include main and experimental [SIL package repositories](http://packages.sil.org)
 * package installation and uninstallation
 
-````bash
+```bash
     cd ~/Docuements
     wget https://raw.githubusercontent.com/chrisvire/vagrant-sil/master/scripts/packages.sh
     sudo bash packages.sh
-````
+```
 
 Minor changes have been made to simplify testing:
 * Turn screen off when inactive: Never
