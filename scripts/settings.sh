@@ -2,7 +2,7 @@
 
 dconf write /com/canonical/unity/launcher/favorites "['application://org.gnome.Nautilus.desktop', 'application://firefox.desktop', 'application://unity-control-center.desktop', 'unity://running-apps', 'application://gnome-terminal.desktop', 'unity://expo-icon', 'unity://devices']"
 dconf write /com/canonical/unity/integrated-menus true
-dconf write /org/gnome/desktop/session/idle-delay 0
+dconf write /org/gnome/desktop/session/idle-delay 'uint32 0'
 dconf write /org/gnome/desktop/screensaver/lock-enabled false
 
 dconf write /com/canonical/unity/lenses/remote-content-search "'none'"
