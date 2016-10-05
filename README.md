@@ -28,44 +28,34 @@ Install the following required software components:
 ## Configuration
 
 Each of the machines have been setup using the documentation for a [base box](https://docs.vagrantup.com/v2/boxes/base.html) which means:
-* username=vagrant, password=vagrant
-* install VBGuestAdditions
-* use vagrant insecure keypair
+* `username=vagrant`, `password=vagrant`
+* `machine=vagrant-<name>`
+* update base packages
 ```bash
- mkdir ~/.ssh
- chmod 0700 ~/.ssh
- wget -O - https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub > ~/.ssh/authorized_keys
- chmod 0600 ~/.ssh/authorized_keys
+sudo apt-get update
+sudo apt-get upgrade
 ```
-* password-less sudo
-```
-sudo visudo
-(add "vagrant ALL=(ALL) NOPASSWD: ALL")
-```
-* ssh tweaks
-```
-cd /etc/ssh
-sudo vi ssh_config
-(add "UseDNS no")
-```
-Each of the machines have been setup to make it easy to work with [SIL LSDev](https://github.com/sillsdev) software
-* apt is pre-configured to include main and experimental [SIL package repositories](http://packages.sil.org)
-* package installation and uninstallation
-
+* install GuestAdditions and reboot
+* run the following scripts to configure (followed by list of changes)
 ```bash
-    cd ~/Docuements
-    wget https://raw.githubusercontent.com/chrisvire/vagrant-sil/master/scripts/packages.sh
-    sudo bash packages.sh
+wget -P Documents/ wget https://raw.githubusercontent.com/chrisvire/vagrant-sil/master/scripts/{compact,packages,settings,vagrant}.sh
+sudo bash Documents/vagrant.sh
+sudo bash Documents/packages.sh
+sudo bash Documents/settings.sh
+sudo bash Documents/compact.sh
 ```
-
-Minor changes have been made to simplify testing:
-* Turn screen off when inactive: Never
-* Lock: Off
-* Change default Profile Colors for terminal (makes it easier to distinguish from host terminal windows)
+ * use vagrant insecure keypair
+ * password-less sudo
+ * apt is pre-configured to include main and experimental [SIL package repositories](http://packages.sil.org)
+ * default package installation and uninstallation for testing environment
+ * Minor changes have been made to simplify testing:
+   * Turn screen off when inactive: Never
+   * Lock: Off
+   * Change default Profile Colors for terminal (makes it easier to distinguish from host terminal windows)
+   * Adding default environment variables to disable usage tracking while testing
+   * Show menus for windows in the Window's title bar
+   * .bashrc change to include [git bash prompt](http://www.thehubbards.org/blog/2014/05/22/git-changing-bash-prompt/)
+   * Disable Online Searches from Dash
 * Unique background image per machine (to easily distinguish the version)
-* Adding default environment variables to disable usage tracking while testing
-* Show menus for windows in the Window's title bar
-* .bashrc change to include [git bash prompt](http://www.thehubbards.org/blog/2014/05/22/git-changing-bash-prompt/)
-* Disable Online Searches from Dash
 
 
