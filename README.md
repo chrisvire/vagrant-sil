@@ -56,6 +56,7 @@ sudo bash Documents/compact.sh
    * Show menus for windows in the Window's title bar
    * .bashrc change to include [git bash prompt](http://www.thehubbards.org/blog/2014/05/22/git-changing-bash-prompt/)
    * Disable Online Searches from Dash
+
 * Unique background image per machine (to easily distinguish the version)
 
 
