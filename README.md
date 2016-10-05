@@ -41,7 +41,9 @@ sudo apt-get upgrade
 wget -P Documents/ wget https://raw.githubusercontent.com/chrisvire/vagrant-sil/master/scripts/{compact,packages,settings,vagrant}.sh
 sudo bash Documents/vagrant.sh
 sudo bash Documents/packages.sh
-sudo bash Documents/settings.sh
+```
+```
+bash Documents/settings.sh
 sudo bash Documents/compact.sh
 ```
  * use vagrant insecure keypair
