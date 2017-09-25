@@ -81,6 +81,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     'trusty32',
     'xenial64',
     'xenial32',
+    'xenial64-gnome',
 #    'wasta64-14',
 #    'wasta32-14',
 #    'wasta64-12',
