@@ -1,6 +1,13 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+def true?(obj)
+  booleans = { "true"=>true, "1"=>true, true=>true, 1=>true, 
+               "false"=>false, "0"=>false, false=>false, 0=>false}
+  booleans.has_key?(obj) ? booleans[obj] : true
+end
+
+
 $hostname_prefix = ENV['VAGRANT_HOSTNAME_PREFIX']
 pref_interface = ENV.fetch('VAGRANT_PREF_INTERFACE', "eth0,eth1,eth2,wlan0,en0,en1,en2").split(/,/)
 bridgedifs_text = %x( VBoxManage list bridgedifs ).split(/^$/)
@@ -58,7 +65,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provider :virtualbox do |vb|
       vb.gui=options[:gui]
       vb.name="vagrant-sil-#{name}"
-      vb.customize ["modifyvm", :id, "--memory", "1024"]
+      vb.customize ["modifyvm", :id, "--memory", ENV.fetch("VAGRANT_MEMORY","1024")]
       vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
       vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
     end
@@ -66,7 +73,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # add public network adapter
     config.vm.network :public_network, :bridge=> $network_interface if options[:bridge]
 
-    if Vagrant.has_plugin?("vagrant-cachier")
+    do_cache = ENV.fetch("VAGRANT_CACHE", true)
+    if true?(do_cache) && Vagrant.has_plugin?("vagrant-cachier")
       # vagrant-cachier setting
       config.cache.scope = :box
     end
