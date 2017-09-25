@@ -9,16 +9,21 @@ bridgedifs = {}
 bridgedifs_text.each do |bif_text|
   bif = {}
   bif_text.lines.each do |l|
-    values = l.chomp.split(/:\s+/)
+    values = l.chomp.split(/:\s+/,2)
     bif[values[0]] = values[1] unless values[0].nil?
   end
   unless bif["IPAddress"] == "0.0.0.0" || bif["IPV6Address"].nil?
-    bridgedifs[bif["Name"]] = bif
+      bridgedifs[bif['Name']] = bif
+    # On Mac, the name is "en0: Ethernet"
+    # This will allow it to work with "en0" or "en0: Ethernet"
+    name = bif['Name'].split(/:/)[0]
+    bridgedifs[name] = bif
   end
 end
 
+
 # http://stackoverflow.com/a/17729961/35577
-pref_interface = pref_interface.map {|n| n if bridgedifs.has_key?(n)}.compact
+pref_interface = pref_interface.map {|n| bridgedifs[n]['Name'] if bridgedifs.has_key?(n)}.compact
 $network_interface=pref_interface[0]
 
 # On Windows, vagrant-cachier is not handling the apt_lists caching correctly.
