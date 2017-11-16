@@ -1,0 +1,18 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Provide defaults for all vagrant files
+# ln -s .../path/to/vagrant-sil/Vagrantfile.local ~/.vagrant.d/Vagrantfile
+
+Vagrant.configure("2") do |config|
+  # In shell environment:
+  # export VAGRANT_SYNC_FOLDERS="$HOME/src=>src,$HOME/packaging=>packaging"
+
+  user_sync_folders = ENV.fetch("VAGRANT_SYNC_FOLDERS", "#{Dir.home}=>host").split(/,/)
+  user_sync_folders
+    .map { |e| Hash[*(e.split(/=>/))] }
+    .reduce({}, :merge)
+    .select { |host_dir,_| File.directory?(host_dir) }
+    .each { |host_dir,vm_dir| config.vm.synced_folder host_dir, "/home/vagrant/#{vm_dir}" }
+
+end
