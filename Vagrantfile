@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 def true?(obj)
-  booleans = { "true"=>true, "1"=>true, true=>true, 1=>true, 
+  booleans = { "true"=>true, "1"=>true, true=>true, 1=>true,
                "false"=>false, "0"=>false, false=>false, 0=>false}
   booleans.has_key?(obj) ? booleans[obj] : true
 end
@@ -67,7 +67,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vb.name="vagrant-sil-#{name}"
       vb.customize ["modifyvm", :id, "--memory", ENV.fetch("VAGRANT_MEMORY","1024")]
       vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
-      vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
+      vb.customize ["modifyvm", :id, "--accelerate3d", "off"]
     end
 
     # add public network adapter
@@ -83,13 +83,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   [
 # Google Drive is not accessible anymore.
 # I will be migrating the files to a permanent home.
-#    'precise64',
-#    'precise32',
     'trusty64',
     'trusty32',
     'xenial64',
     'xenial32',
     'xenial64-gnome',
+    'bionic64',
 #    'wasta64-14',
 #    'wasta32-14',
 #    'wasta64-12',
